@@ -1,5 +1,5 @@
 import express from 'express';
-import {productManager} from './ProductsManager.js'
+import {productManager} from './ProductManager.js'
 const app = express()
 
 //Get all products.
