@@ -26,6 +26,11 @@ class ProductsManager {
         }
     }
 
+    /**
+    * Given an id this function searches and returns the product with that id
+    * @param {Int} id - number of id
+    * @returns {Promise<Array<Product>>} A promise that returns a product .
+    */
     async getProductsById(id){
         try{
             const productsFile = await this.getProducts({});
