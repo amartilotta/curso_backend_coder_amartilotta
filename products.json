@@ -1,0 +1,7 @@
+[
+    { "id": 1, "name": "Placa video", "price": 100000 },
+    { "id": 2, "name": "Monitor", "price": 80000 },
+    { "id": 3, "name": "Auriculares", "price": 53000 },
+    { "id": 4, "name": "Microondas", "price": 45000 },
+    { "id": 5, "name": "Laptop", "price": 999999 }
+]
