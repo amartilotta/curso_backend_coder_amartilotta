@@ -5,22 +5,26 @@ const router = Router();
 
 router.post('/', async(req,res) =>{
     try{
-        const {products} = req.body;
-        await carts.addCarrito(products)
-        res.status(200).json({message: "Product added"}) 
+        const products = req.body;
+        if (products.lenth === 0){
+            res.status(200).json({message: "No products to add"}) 
+        } else{
+        await carts.addCart(products)
+        res.status(200).json({message: "Products added to new cart"}) 
+        }
     } catch(error){
-        return error
+        res.status(500).json({message: error}) 
     }
 })
 
 router.get('/:cid', async(req,res) =>{
     const {cid} = req.params
     try{
-        const productsCarrito = await carts.getProductsById(+cid)
-        if (!productsCarrito){
-            res.status(400).json({message: "Carrito not found with the id, try anoter id"}) 
+        const productsCart= await carts.getCartById(+cid)
+        if (!productsCart){
+            res.status(400).json({message: "Cart not found with the id, try anoter id"}) 
         } else{
-        res.status(200).json({message: "Carrito found", productsCarrito}) 
+        res.status(200).json({message: "Cart found", products}) 
         }
     } catch(error){
         res.status(500).json({message: error}) 
@@ -28,12 +32,18 @@ router.get('/:cid', async(req,res) =>{
 })
 
 router.post('/:cid/product/:pid', async(req,res) =>{
+    const {cid,pid} = req.params;
     try{
-        const {title,description,code,price,status,stock,category,thumbnails} = req.body;
-        await carts.addProduct(title,description,code,price,status,stock,category,thumbnails)
-        res.status(200).json({message: "Product added to carts"}) 
+        const response = await carts.addProductToCartById(+cid,+pid)
+        if (response === -1){
+            res.status(400).json({
+                message: 'Cart not found with the id sent'
+            })
+        } else{
+            res.status(200).json({message: "Product added to cart"})
+        }
     } catch(error){
-        return error
+        res.status(500).json({message: error}) 
     }
 })
 

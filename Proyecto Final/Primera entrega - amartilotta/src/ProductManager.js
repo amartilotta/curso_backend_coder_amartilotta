@@ -27,7 +27,7 @@ class ProductManager{
                 thumbnails,
             };
             products.push({id,...newProduct});
-            await fs.promises.writeFile(this.path, JSON.stringify(products));
+            await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
         } catch (error){
             return error
         }
@@ -68,7 +68,7 @@ class ProductManager{
                 return -1
             }
             const newArrayProducts = products.filter((p)=>p.id !== idProduct)
-            await fs.promises.writeFile(this.path, JSON.stringify(newArrayProducts))
+            await fs.promises.writeFile(this.path, JSON.stringify(newArrayProducts, null, 2))
             return 1
         } catch (error){
             return error
@@ -84,7 +84,7 @@ class ProductManager{
             } 
             const product = products[productIndex]
             products[productIndex] = {...product, ...updatedProduct}
-            await fs.promises.writeFile(this.path, JSON.stringify(products))
+            await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2))
             return 1
           } catch (error) {
             return error;

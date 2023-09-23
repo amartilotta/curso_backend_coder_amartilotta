@@ -1,1 +1,72 @@
-[{"id":1,"title":"Nuevo título","description":"Nueva descripción","code":"ABC123","price":10.99,"status":true,"stock":50,"category":"Electrónica","thumbnails":["imagen1.jpg","imagen2.jpg"],"thumbnail":"nuevo_thumbnail.jpg"},{"id":2,"title":"Nuevo título","description":"Un vestido de noche con diseño exclusivo y detalles en encaje.","code":"RN002","price":129.99,"status":true,"stock":30,"category":"Moda","thumbnails":["imagen3.jpg","imagen4.jpg"]},{"id":3,"title":"Kit de Maquillaje Profesional","description":"Un conjunto de maquillaje de alta calidad para un aspecto impecable.","code":"MB003","price":49.99,"status":true,"stock":40,"category":"Belleza","thumbnails":["imagen5.jpg","imagen6.jpg"]},{"id":4,"title":"Cuentos para Niños Felices","description":"Una colección de cuentos encantadores para niños de todas las edades.","code":"CN004","price":19.99,"status":true,"stock":60,"category":"Libros","thumbnails":["imagen7.jpg","imagen8.jpg"]},{"id":5,"title":"Bicicleta de Montaña Todo Terreno","description":"Una bicicleta resistente para aventuras en la montaña y el campo.","code":"BT005","price":4111199.99,"status":true,"stock":15,"category":"Deportes","thumbnails":["imagen9.jpg","imagen10.jpg"]}]
+[
+  {
+    "id": 1,
+    "title": "Nuevo título",
+    "description": "Nueva descripción",
+    "code": "ABC123",
+    "price": 10.99,
+    "status": true,
+    "stock": 50,
+    "category": "Electrónica",
+    "thumbnails": [
+      "imagen1.jpg",
+      "imagen2.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Nuevo título",
+    "description": "Un vestido de noche con diseño exclusivo y detalles en encaje.",
+    "code": "RN002",
+    "price": 129.99,
+    "status": true,
+    "stock": 30,
+    "category": "Moda",
+    "thumbnails": [
+      "imagen3.jpg",
+      "imagen4.jpg"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Kit de Maquillaje Profesional",
+    "description": "Un conjunto de maquillaje de alta calidad para un aspecto impecable.",
+    "code": "MB003",
+    "price": 49.99,
+    "status": true,
+    "stock": 40,
+    "category": "Belleza",
+    "thumbnails": [
+      "imagen5.jpg",
+      "imagen6.jpg"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Cuentos para Niños Felices",
+    "description": "Una colección de cuentos encantadores para niños de todas las edades.",
+    "code": "CN004",
+    "price": 19.99,
+    "status": true,
+    "stock": 60,
+    "category": "Libros",
+    "thumbnails": [
+      "imagen7.jpg",
+      "imagen8.jpg"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Bicicleta de Montaña Todo Terreno",
+    "description": "Una bicicleta resistente para aventuras en la montaña y el campo.",
+    "code": "BT005",
+    "price": 4111199.99,
+    "status": true,
+    "stock": 15,
+    "category": "Deportes",
+    "thumbnails": [
+      "imagen9.jpg",
+      "imagen10.jpg"
+    ]
+  }
+]

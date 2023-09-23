@@ -3,93 +3,86 @@ import fs from 'fs'
 class Carts{
     constructor(){
         this.path = './carrito.json'
-        this.products = []
+        this.carts = []
     }
 
-    async addProduct(title,description,code,price,status=true,stock,category,thumbnails){
+    async addCart(products){
         try{
-            const products = await this.getProducts({});
+            const carts = await this.getCarts();
             let id;
-            if (!products.length){
+            if (!carts.length){
                 id = 1
             } else {
-                id = products[products.length -1 ].id +1
+                id = carts[carts.length -1 ].id +1
             }
-            const newProduct = {
-                title,
-                description,
-                code,
-                price,
-                status,
-                stock,
-                code,
-                category,
-                thumbnails,
+            const newCart = {
+                products,
             };
-            products.push({id,...newProduct});
-            await fs.promises.writeFile(this.path, JSON.stringify(products));
+            carts.push({id,...newCart});
+            await fs.promises.writeFile(this.path, JSON.stringify(carts, null, 2));
         } catch (error){
+            console.log("Error add cart: ", error );
             return error
         }
     }
 
-    async getProducts(queryObj){
-        console.log("entre")
-        const {limit} = queryObj
+    async getCarts(){
         try{
             if(fs.existsSync(this.path)){
-                const products = await fs.promises.readFile(this.path, 'utf-8')
-                const productsArray = JSON.parse(products)
-                return limit ? productsArray.slice(0,limit) :productsArray;
+                const carts = await fs.promises.readFile(this.path, 'utf-8')
+                const cartsArray = JSON.parse(carts)
+                return cartsArray;
             } else {
-                return this.products
+                return this.carts
             }
         } catch (error){
+            console.log("Error getting carts: ", error );
             return error
         }
     }
 
-    async getProductsById(idProduct){
-        try {
+    async getCartById(idCart){
+        try{
             if(fs.existsSync(this.path)){
-                const products = await this.getProducts({});
-                const product = products.find((p) => p.id === idProduct);
-                return product
+                const carts = await this.getCarts();
+                const cart = carts.find((c) => c.id === idCart);
+                return cart.products;
+            } 
+        } catch (error){
+            console.log("Error getting cart: ", error );
+            return error
+        }
+    }
+
+    async addProductToCartById(idCart,idProduct){
+        try {
+            const allCarts = await this.getCarts();
+            const cartIndex = allCarts.findIndex((cart) => cart.id === idCart);
+
+            if (cartIndex === -1) { 
+                return -1;
             }
+            // Find the product in the cart
+            const productIndex = allCarts[cartIndex].products.findIndex((p) => p.id === idProduct);
+
+            if (productIndex === -1) {
+                allCarts[cartIndex].products.push({"id":idProduct, "quantity":1})
+                await fs.promises.writeFile(this.path, JSON.stringify(allCarts, null, 2));
+                return 1;
+            }
+
+            // Incrementar la cantidad del producto en 1
+            allCarts[cartIndex].products[productIndex].quantity += 1;
+            await fs.promises.writeFile(this.path, JSON.stringify(allCarts, null, 2));
+            return 1;
+
         } catch (error) {
+            console.log("Error adding a product: ", error );
+            return error
             
         }
-    }
 
-    async deleteProduct(idProduct){
-        try{
-            const products = await this.getProducts({});
-            const productToDelete = products.find(p=>p.id === idProduct)
-            if(!productToDelete){
-                return -1
-            }
-            const newArrayProducts = products.filter((p)=>p.id !== idProduct)
-            await fs.promises.writeFile(this.path, JSON.stringify(newArrayProducts))
-            return 1
-        } catch (error){
-            return error
-        }
-    }
 
-    async updateProduct(idProduct, updatedProduct) {
-        try {
-            const products = await this.getProducts({});
-            const productIndex = products.findIndex((p) => p.id === idProduct);
-            if (productIndex === -1) {
-                return -1
-            } 
-            const product = products[productIndex]
-            products[productIndex] = {...product, ...updatedProduct}
-            await fs.promises.writeFile(this.path, JSON.stringify(products))
-            return 1
-          } catch (error) {
-            return error;
-        }
     }
 }
 
