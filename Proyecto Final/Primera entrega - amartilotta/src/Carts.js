@@ -59,19 +59,21 @@ class Carts{
             const allCarts = await this.getCarts();
             const cartIndex = allCarts.findIndex((cart) => cart.id === idCart);
 
+            //b nm
             if (cartIndex === -1) { 
                 return -1;
             }
             // Find the product in the cart
             const productIndex = allCarts[cartIndex].products.findIndex((p) => p.id === idProduct);
 
+            // If the product does not exist, a new product is created with the id passed by parameter
             if (productIndex === -1) {
                 allCarts[cartIndex].products.push({"id":idProduct, "quantity":1})
                 await fs.promises.writeFile(this.path, JSON.stringify(allCarts, null, 2));
                 return 1;
             }
 
-            // Incrementar la cantidad del producto en 1
+            // Increase the quantity of the product by 1
             allCarts[cartIndex].products[productIndex].quantity += 1;
             await fs.promises.writeFile(this.path, JSON.stringify(allCarts, null, 2));
             return 1;
