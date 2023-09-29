@@ -24,9 +24,10 @@ router.get('/:cid', async(req,res) =>{
         if (!productsCart){
             res.status(400).json({message: "Cart not found with the id, try anoter id"}) 
         } else{
-        res.status(200).json({message: "Cart found", products}) 
+            res.status(200).json({message: "Cart found", productsCart}) 
         }
     } catch(error){
+        console.log("al final rompi")
         res.status(500).json({message: error}) 
     }
 })
