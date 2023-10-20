@@ -28,6 +28,12 @@ router.delete('/:idProduct', async(req,res)=>{
     res.json({message: 'Product deleted', product: deletedProduct})
 });
 
+router.put('/:idProduct', async(req,res)=>{
+    const {idProduct} = req.params;
+    const product = await productsManagerDB.updateOne(idProduct,req.body);
+    res.json({message: 'Product updated', product})
+})
+
 
 
 export default router

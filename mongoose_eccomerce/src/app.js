@@ -8,6 +8,8 @@ import './dao/db/configDB.js';
 import productsRouter from './routes/products.router.js';
 import productsRouterDb from './routes/products.router.db.js';
 import cartsRouter from './routes/carts.router.js';
+import cartsRouterDb from './routes/carts.router.db.js';
+import messagesRouterDb from './routes/messages.router.db.js';
 
 const app = express();
 const PORT = 8080;
@@ -27,7 +29,9 @@ app.set('view engine', 'handlebars');
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
 app.use('/', viewsRouter);
-app.use('/apiDB', productsRouterDb);
+app.use('/apiDB/products', productsRouterDb);
+app.use('/apiDB/carts', cartsRouterDb);
+app.use("api/messages", messagesRouterDb)
 
 
 const httpServer = app.listen(PORT, () => {

@@ -1,9 +1,18 @@
 import {Schema,model} from "mongoose";
 
 const cartsSchema = new Schema({
-    products:{
-        type:Object,
-    },
+    products: [
+        {
+            title: {
+                type: String,
+                required: true
+            },
+            quantity: {
+                type: Number,
+                required: true
+            }
+        }
+    ]
 
 });
 

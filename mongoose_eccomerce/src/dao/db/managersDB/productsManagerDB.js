@@ -21,7 +21,7 @@ class ProductsManager {
     async updateOne(id, obj){
         const response = await productsModel.updateOne(
             { _id: id },
-            { obj }
+            { $set: obj }
         );
         return response
 
