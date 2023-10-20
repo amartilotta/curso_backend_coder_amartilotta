@@ -3,7 +3,11 @@ import {engine} from 'express-handlebars';
 import { __dirname } from './utils.js';
 import { Server } from 'socket.io';
 import viewsRouter from './routes/views.router.js';
-import { productManager } from "./ProductManager.js";
+//import { productManager } from "./ProductManager.js";
+import './dao/db/configDB.js';
+import productsRouter from './routes/products.router.js';
+import productsRouterDb from './routes/products.router.db.js';
+import cartsRouter from './routes/carts.router.js';
 
 const app = express();
 const PORT = 8080;
@@ -19,7 +23,12 @@ app.set('view engine', 'handlebars');
 
 // routes
 
+// routes
+app.use('/api/products', productsRouter);
+app.use('/api/carts', cartsRouter);
 app.use('/', viewsRouter);
+app.use('/apiDB', productsRouterDb);
+
 
 const httpServer = app.listen(PORT, () => {
     console.log(`Escuchando al puerto ${PORT}`);
@@ -29,30 +38,17 @@ const httpServer = app.listen(PORT, () => {
 
 const socketServer = new Server(httpServer);
 
+// connection - disconnect
+
+const messages = [];
+
 socketServer.on('connection', (socket)=>{
-    
-    socket.on('addProduct', async (product) =>{
-        const {title,description,price} = product
-        const newProduct = await productManager.addProduct(title,description,price);
-        socket.emit("productCreated", newProduct);
+    socket.on('newUser', (user)=>{
+        socket.broadcast.emit('newUserBroadcast', user);
     });
 
-    socket.on('deleteProduct', async (inputId) =>{
-
-        let response = 1;
-
-        const productFind = await productManager.getProductsById(+inputId)
-        if (productFind) {
-            console.log("Preparado para borrar el producto")
-            await productManager.deleteProduct(+inputId);
-        } else {
-            console.log("entre al else")
-            response = -1;
-        }
-
-        console.log("soy el response final", response)
-        const newproducts = await productManager.getProducts({})
-        console.log(newproducts)
-        socket.emit('productDeleted', newproducts,response);
+    socket.on('message', info =>{
+        messages.push(info);
+        socketServer.emit('chat', messages)
     });
 });

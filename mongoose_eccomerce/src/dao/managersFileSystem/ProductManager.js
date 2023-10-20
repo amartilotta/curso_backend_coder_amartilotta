@@ -22,7 +22,6 @@ class ProductManager{
                 code,
                 status,
                 stock,
-                code,
                 category,
                 thumbnails,
             };

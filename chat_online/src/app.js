@@ -18,11 +18,11 @@ app.engine('handlebars', engine());
 app.set('views', __dirname + '/views');
 app.set('view engine', 'handlebars');
 
-app.use('/', viewsRouter);
 
 // routes
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
+app.use('/', viewsRouter);
 
 const httpServer = app.listen(PORT, () => {
     console.log(`Escuchando al puerto ${PORT}`);
