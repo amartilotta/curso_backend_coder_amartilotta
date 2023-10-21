@@ -6,14 +6,17 @@ const h3Name = document.getElementById('name');
 const divChat = document.getElementById('chat');
 
 let user;
+let email;
 
 Swal.fire({
-    title: 'Welcome',
-    text: 'What is your name?',
+    title: 'Bienvenido',
+    text: 'Ingrese su email',
     input: 'text',
     inputValidator: value=>{
         if(!value){
-            return "Name is required"
+            return "El nombre es requerido"
+        } else if (!value.includes('@')) {
+            return 'El email debe contener una arroba (@)';
         }
     },
     confirmButtonText: 'Enter',
@@ -21,12 +24,11 @@ Swal.fire({
     user = input.value
     h3Name.innerText = `Chat user: ${user}`;
     socketClient.emit('newUser', user)
-  });
+});
 
 socketClient.on('newUserBroadcast', (user)=>{
-    //console.log(`${user} connected`);
     Toastify({
-        text: `${user} connected`,
+        text: `${user} conectado`,
         duration: 5000,
         
         style: {
@@ -39,16 +41,19 @@ socketClient.on('newUserBroadcast', (user)=>{
 form.onsubmit = (e) =>{
     e.preventDefault();
     const infoMessage = {
-        name: user,
+        user: user,
         message: inputMessage.value,
     };
+    inputMessage.value = '';
+
+    // Ajusta la posición de desplazamiento al final del chat
+    divChat.scrollTop = chat.scrollHeight;
     socketClient.emit('message', infoMessage);
 };
 
 socketClient.on('chat',(messages) => {
-    //console.log(messages);
     const chat = messages.map(
-        objMessage=>`<p>${objMessage.name}: ${objMessage.message}</p>`
+        objMessage=>`<p>${objMessage.user}: ${objMessage.message}</p>`
     ).join(' ')
     divChat.innerHTML = chat;
     

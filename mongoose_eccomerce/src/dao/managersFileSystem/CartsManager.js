@@ -59,7 +59,6 @@ class CartsManager{
             const allCarts = await this.getCarts();
             const cartIndex = allCarts.findIndex((cart) => cart.id === idCart);
 
-            //b nm
             if (cartIndex === -1) { 
                 return -1;
             }

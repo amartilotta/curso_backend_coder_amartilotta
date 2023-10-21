@@ -3,7 +3,6 @@ import {productsManagerDB} from '../dao/db/managersDB/productsManagerDB.js'
 
 const router = Router();
 
-
 //Rutas de la DB
 router.post('/', async(req,res)=>{
     const createdProduct = await productsManagerDB.createOne(req.body);
@@ -33,7 +32,5 @@ router.put('/:idProduct', async(req,res)=>{
     const product = await productsManagerDB.updateOne(idProduct,req.body);
     res.json({message: 'Product updated', product})
 })
-
-
 
 export default router

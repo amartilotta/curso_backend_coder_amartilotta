@@ -28,7 +28,6 @@ class CartsManager {
     }
 
     async deleteCartById(id){
-        //const response = await productsModel.deleteOne({_id:id}})
         const response = await cartsModel.findByIdAndDelete(id)
         return response
     }

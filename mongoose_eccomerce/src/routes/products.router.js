@@ -77,5 +77,4 @@ router.put('/:idProduct', async(req,res) =>{
     }
 })
 
-
 export default router

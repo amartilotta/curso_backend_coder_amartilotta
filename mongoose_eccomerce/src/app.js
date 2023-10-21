@@ -3,13 +3,12 @@ import {engine} from 'express-handlebars';
 import { __dirname } from './utils.js';
 import { Server } from 'socket.io';
 import viewsRouter from './routes/views.router.js';
-//import { productManager } from "./ProductManager.js";
 import './dao/db/configDB.js';
 import productsRouter from './routes/products.router.js';
 import productsRouterDb from './routes/products.router.db.js';
 import cartsRouter from './routes/carts.router.js';
 import cartsRouterDb from './routes/carts.router.db.js';
-import messagesRouterDb from './routes/messages.router.db.js';
+import {messagesManagerDB} from './dao/db/managersDB/messagesManagerDB.js'
 
 const app = express();
 const PORT = 8080;
@@ -24,14 +23,11 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'handlebars');
 
 // routes
-
-// routes
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
 app.use('/', viewsRouter);
 app.use('/apiDB/products', productsRouterDb);
 app.use('/apiDB/carts', cartsRouterDb);
-app.use("api/messages", messagesRouterDb)
 
 
 const httpServer = app.listen(PORT, () => {
@@ -51,8 +47,9 @@ socketServer.on('connection', (socket)=>{
         socket.broadcast.emit('newUserBroadcast', user);
     });
 
-    socket.on('message', info =>{
+    socket.on('message', async (info) =>{
         messages.push(info);
+        const savedMessage = await messagesManagerDB.saveMessage(info)
         socketServer.emit('chat', messages)
     });
 });
