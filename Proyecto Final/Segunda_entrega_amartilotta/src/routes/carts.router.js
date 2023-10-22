@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import {carts} from '../Carts.js'
+import {cartsManager} from '../dao/managersFileSystem/CartsManager.js'
 
 const router = Router();
 
@@ -9,7 +9,7 @@ router.post('/', async(req,res) =>{
         if (products.lenth === 0){
             res.status(200).json({message: "No products to add"}) 
         } else{
-        await carts.addCart(products)
+        await cartsManager.addCart(products)
         res.status(200).json({message: "Products added to new cart"}) 
         }
     } catch(error){
@@ -20,7 +20,7 @@ router.post('/', async(req,res) =>{
 router.get('/:cid', async(req,res) =>{
     const {cid} = req.params
     try{
-        const productsCart= await carts.getCartById(+cid)
+        const productsCart= await cartsManager.getCartById(+cid)
         if (!productsCart){
             res.status(400).json({message: "Cart not found with the id, try anoter id"}) 
         } else{
@@ -35,7 +35,7 @@ router.get('/:cid', async(req,res) =>{
 router.post('/:cid/product/:pid', async(req,res) =>{
     const {cid,pid} = req.params;
     try{
-        const response = await carts.addProductToCartById(+cid,+pid)
+        const response = await cartsManager.addProductToCartById(+cid,+pid)
         if (response === -1){
             res.status(400).json({
                 message: 'Cart not found with the id sent'
@@ -47,6 +47,5 @@ router.post('/:cid/product/:pid', async(req,res) =>{
         res.status(500).json({message: error}) 
     }
 })
-
 
 export default router

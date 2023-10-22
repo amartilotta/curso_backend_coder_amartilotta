@@ -6,7 +6,7 @@ class ProductManager{
         this.products = []
     }
     
-    async addProduct(title,description,code,price,status=true,stock,category,thumbnails){
+    async addProduct(title,description,price,code,status=true,stock,category,thumbnails){
         try{
             const products = await this.getProducts({});
             let id;
@@ -18,16 +18,17 @@ class ProductManager{
             const newProduct = {
                 title,
                 description,
-                code,
                 price,
+                code,
                 status,
                 stock,
-                code,
                 category,
                 thumbnails,
             };
+            console.log(products)
             products.push({id,...newProduct});
             await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
+            return {id,...newProduct};
         } catch (error){
             return error
         }

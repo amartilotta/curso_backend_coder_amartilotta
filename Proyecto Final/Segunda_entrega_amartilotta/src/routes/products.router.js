@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import {productManager} from '../ProductManager.js'
+import {productManager} from '../dao/managersFileSystem/ProductManager.js'
 
 const router = Router();
 
@@ -76,6 +76,5 @@ router.put('/:idProduct', async(req,res) =>{
         res.status(500).json({message: error}) 
     }
 })
-
 
 export default router

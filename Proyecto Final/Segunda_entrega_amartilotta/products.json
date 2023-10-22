@@ -1,0 +1,25 @@
+[
+  {
+    "id": 1,
+    "title": "Arroz",
+    "description": "",
+    "price": "",
+    "status": true
+  },
+  {
+    "id": 2,
+    "title": "Limon",
+    "description": "Amarillo",
+    "price": "000-000-002",
+    "code": 50,
+    "status": true
+  },
+  {
+    "id": 3,
+    "title": "Limon",
+    "description": "Amarillo",
+    "price": "000-000-002",
+    "code": 50,
+    "status": true
+  }
+]

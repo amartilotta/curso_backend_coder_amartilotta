@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-class Carts{
+class CartsManager{
     constructor(){
         this.path = './carrito.json'
         this.carts = []
@@ -59,7 +59,6 @@ class Carts{
             const allCarts = await this.getCarts();
             const cartIndex = allCarts.findIndex((cart) => cart.id === idCart);
 
-            //b nm
             if (cartIndex === -1) { 
                 return -1;
             }
@@ -88,4 +87,4 @@ class Carts{
     }
 }
 
-export const carts = new Carts(); 
+export const cartsManager = new CartsManager(); 
