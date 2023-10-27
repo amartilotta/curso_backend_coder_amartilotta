@@ -3,33 +3,57 @@ import { cartsModel } from "./models/carts.model.js";
 class CartsManager {
 
     async getCarts(){
-        const response = await cartsModel.find()
+        try{
+        const response = await cartsModel.find().lean()
         return response
+        } catch (error) {
+            console.error(error)
+            return error
+        }
     }
 
     async getCartById(id){
-        const response = await cartsModel.findById(id)
+        try {
+        const response = await cartsModel.findById(id).populate({ path: "products.product"}).lean()
         return response
+        } catch (error){
+            console.error(error)
+            return error
+        }
     }
 
-    async addCart(productsList){
-        const response = await cartsModel.create({ products: productsList });
+    async createCart(){
+        try{
+        const response = await cartsModel.create({});
         return response
-
+        } catch (error){
+            console.error(error)
+            return error
+        }
     }
 
     async addProductToCartById(id, obj){
+        try {
         const response = await cartsModel.updateOne(
             { _id: id },
             { $set: obj }
         );
-        return response
-
+        const success = result.matchedCount > 0
+        return success
+        } catch (error){
+        console.error(error)
+        return error
+    }
     }
 
     async deleteCartById(id){
+        try {
         const response = await cartsModel.findByIdAndDelete(id)
         return response
+        } catch (error){
+            console.error(error)
+            return error
+        }
     }
 }
 
