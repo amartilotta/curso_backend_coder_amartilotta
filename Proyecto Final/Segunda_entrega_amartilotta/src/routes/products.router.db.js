@@ -5,13 +5,17 @@ const router = Router();
 
 //Rutas de la DB
 router.post('/', async(req,res)=>{
-    const createdProduct = await productsManagerDB.createOne(req.body);
+    const createdProduct = await productsManagerDB.createProduct(req.body);
     res.json({message: 'Product created', product: createdProduct})
 })
 
 router.get('/', async(req,res)=>{
-    const products = await productsManagerDB.findAll();
-    res.json({message: 'Products', products})
+    const response = await productsManagerDB.getProducts(req.query);
+    console.log("soy el req.query",req.query);
+    const info = {
+
+    }
+    res.json({message: 'Products', response})
 })
 
 router.get('/:idProduct', async(req,res)=>{

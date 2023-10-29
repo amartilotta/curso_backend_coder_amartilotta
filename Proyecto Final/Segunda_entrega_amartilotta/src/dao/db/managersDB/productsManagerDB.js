@@ -2,10 +2,12 @@ import { productsModel } from "./models/products.model.js";
 
 class ProductsManager {
 
-    async getProducts(page=1, limit=10,sort={}, query={}){
+    async getProducts(obj){
         try {
-            const options = { page, limit, sort, lean:true}
-            const result = await productsModel.paginate(query,options)
+            const { page = 1, limit =10 , sort:sortPrice, ...queryFilter} = obj
+            console.log(sortPrice)
+            const options = { page, limit, sort:{price: sortPrice === "asc"? 1 : -1}, lean:true}
+            const result = await productsModel.paginate(queryFilter,options)
 
             return {
                 results: result.docs,
