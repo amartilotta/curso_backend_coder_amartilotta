@@ -19,13 +19,11 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'handlebars');
 
 // routes
-app.use('/', viewsRouter);
+app.use('/views/', viewsRouter);
 app.use('/apiDB/products', productsRouterDb);
 app.use('/apiDB/carts', cartsRouterDb);
 
 
 const httpServer = app.listen(PORT, () => {
-    console.log(`Escuchando al puerto ${PORT}`);
+    console.log(`Listening to port ${PORT}`);
 });
-
-// websocket - server

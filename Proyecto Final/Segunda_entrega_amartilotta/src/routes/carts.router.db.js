@@ -5,32 +5,59 @@ const router = Router();
 
 //Rutas de la DB
 router.post('/', async(req,res)=>{
-    const createdCart = await cartsManagerDB.addCart(req.body);
-    res.json({message: 'Cart created', cart: createdCart})
+    try{
+        const createdCart = await cartsManagerDB.createCart();
+        res.status(200).json({message: 'Cart created', cart: createdCart});
+    }catch(error){
+        console.log(error);
+        res.status(500).json({message:error});
+    }
+
 })
 
 router.get('/', async(req,res)=>{
-    const carts = await cartsManagerDB.getCarts();
-    res.json({message: 'Carts', carts})
+    try{
+        const carts = await cartsManagerDB.getCarts();
+        res.status(200).json({message: 'Carts', carts});
+    }catch(error){
+        console.log(error);
+        res.status(500).json({message:error});
+    }
+    
 })
 
-router.get('/:idCart', async(req,res)=>{
-    const {idCart} = req.params;
-    const cart = await cartsManagerDB.getCartById(idCart);
-    res.json({message: 'Cart', cart})
+router.get('/:cid', async(req,res)=>{
+    const {cid} = req.params;
+    try{
+        const cart = await cartsManagerDB.getCartById(cid);
+        res.status(200).json({message: 'Cart', cart});
+    }catch(error){
+        console.log(error);
+        res.status(500).json({message:error});
+    }
 })
 
 
-router.delete('/:idCart', async(req,res)=>{
-    const {idCart} = req.params;
-    const deletedCart = await cartsManagerDB.deleteCartById(idCart);
-    res.json({message: 'Cart deleted', cart: deletedCart})
+router.delete('/:cid', async(req,res)=>{
+    const {cid} = req.params;
+    try{
+        const deletedCart = await cartsManagerDB.deleteCartById(cid);
+        res.status(200).json({message: 'Cart deleted', cart: deletedCart})
+    }catch(error){
+        console.log(error);
+        res.status(500).json({message:error});
+    }
 });
 
-router.put('/:idCart', async(req,res)=>{
-    const {idCart} = req.params;
-    const cart = await cartsManagerDB.addProductToCartById(idCart,req.body);
-    res.json({message: 'Cart updated', cart})
+router.put('/:cid', async(req,res)=>{
+    const {cid} = req.params;
+    try{
+        const cart = await cartsManagerDB.addProductToCartById(cid,req.body);
+        res.status(200).json({message: 'Cart updated', success:"true"})
+    }catch(error){
+        console.log(error);
+        res.status(500).json({message:error})
+    }
 })
 
 export default router
