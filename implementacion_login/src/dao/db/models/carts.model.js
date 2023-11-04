@@ -4,14 +4,14 @@ const cartsSchema = new Schema({
     products: {
         type: [
             {
-                product: {
+                _id: {
                     type: Schema.Types.ObjectId,
                     ref:"Products",
                     required: true
                 },
                 quantity: {
                     type: Number,
-                    required: true
+                    default: 1
                 }
             }
         ],

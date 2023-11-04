@@ -30,7 +30,7 @@ const productsSchema = new Schema({
         type:String,
     },
     thumbnails:{
-        type:String,
+        type:Array,
         default: []
     },
 })

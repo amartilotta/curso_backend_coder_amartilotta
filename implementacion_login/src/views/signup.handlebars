@@ -1,0 +1,22 @@
+<h1>SIGNUP</h1>
+<form action="/apiDB/users/signup" method="post">
+    First Name: <input type="text" name="first_name" id="first_name">
+    Last Name: <input type="text" name="last_name" id="last_name">
+    Email: <input type="email" name="email" id="email">
+    Password: <input type="password" name="password" id="password">
+    <input type="submit" value="SIGNUP">
+</form>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+{{#if errorMessage}}
+    <script>
+        var errorMessage = "{{errorMessage}}";
+        Toastify({
+        text: errorMessage,
+        duration: 5000,
+        style: {
+          background: "linear-gradient(to right, #FF0000, #FF5733)",
+        },
+      }).showToast();
+    </script>
+{{/if}}

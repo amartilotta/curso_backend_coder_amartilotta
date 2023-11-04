@@ -3,8 +3,12 @@
 <ul>
   {{#each products}}
     <li>
-        <span> <b>{{this.product.title}}</b> </span>
+        <span> <b>{{this._id.title}}</b> </span>
         - <span> Quantity:{{this.quantity}} </span>
     </li>
   {{/each}}
 </ul>
+
+{{#unless products.length}}
+  <h2>The cart is empty!</h2>
+{{/unless}}

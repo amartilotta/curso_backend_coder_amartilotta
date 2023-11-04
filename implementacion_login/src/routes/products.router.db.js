@@ -5,36 +5,73 @@ const router = Router();
 
 //Rutas de la DB
 router.post('/', async(req,res)=>{
-    const createdProduct = await productsManagerDB.createProduct(req.body);
-    res.json({message: 'Product created', product: createdProduct})
+    try{
+        const requiredFields = ["title", "description", "code", "price", "stock", "category"]
+        for (const field of requiredFields) {
+            if (!req.body[field]) {
+                return res.status(400).json({ message: `Field ${field} is required` })
+            }
+        }
+        const createdProduct = await productsManagerDB.createProduct(req.body);
+        res.status(200).json({message: 'Product created', success: createdProduct})
+    }catch(error){
+        console.log(error);
+        res.status(500).json({message:error})
+    }
 })
 
 router.get('/', async(req,res)=>{
-    const response = await productsManagerDB.getProducts(req.query);
-    console.log("soy el req.query",req.query);
-    const info = {
-
+    try{
+        const response = await productsManagerDB.getProducts(req.query);
+        const info = {
+            status: "success",
+            ...response,
+            totalProducts: response.count,
+            resultsAmount: response.results.length,
+            payload: response.results,
+        }
+        delete info.results;
+        
+        res.status(200).json({message: 'Products', info })
+    }catch(error){
+        console.log(error);
+        res.status(500).json({message:error})
     }
-    res.json({message: 'Products', response})
 })
+
 
 router.get('/:idProduct', async(req,res)=>{
     const {idProduct} = req.params;
-    const product = await productsManagerDB.findById(idProduct);
-    res.json({message: 'Product', product})
+    try{
+        const product = await productsManagerDB.getProductById(idProduct);
+        res.status(200).json({message: 'Product', product})
+    }catch(error){
+        console.log(error);
+        res.status(500).json({message:error})
+    }
 })
 
 
 router.delete('/:idProduct', async(req,res)=>{
     const {idProduct} = req.params;
-    const deletedProduct = await productsManagerDB.deleteOne(idProduct);
-    res.json({message: 'Product deleted', product: deletedProduct})
+    try{
+        const deletedProduct = await productsManagerDB.deleteProductById(idProduct);
+        res.status(200).json({message: 'Product deleted', deletedProduct, success: "true"})
+    }catch(error){
+        console.log(error);
+        res.status(500).json({message:error})
+    }
 });
 
 router.put('/:idProduct', async(req,res)=>{
     const {idProduct} = req.params;
-    const product = await productsManagerDB.updateOne(idProduct,req.body);
-    res.json({message: 'Product updated', product})
+    try{
+        const updatedProduct = await productsManagerDB.updateProduct(idProduct,req.body);
+        res.status(200).json({message: 'Product updated', updatedProduct, success:"true"})
+    }catch(error){
+        console.log(error);
+        res.status(500).json({message:error})
+    }
 })
 
 export default router

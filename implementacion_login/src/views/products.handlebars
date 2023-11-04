@@ -1,0 +1,26 @@
+<h2>Bienvenido {{first_name}} {{last_name}}</h2>
+<h2>Email: {{email}}</h2>
+<h2>Rol: {{rol}}</h2>
+<h3>Products</h3>
+<ul>
+  {{#each products}}
+    <li>
+        <span> <b>{{this.title}}</b> </span>
+        - <span> Price: ${{this.price}} </span>
+        - <span> Stock: {{this.stock}} </span>
+        - <span> Category: {{this.category}} </span>
+        - <button data-product-id={{this._id}} data-cart-id="65453302d7b2e466e8279ad1" onclick="addProductToCart(this)">Add to cart</button>
+    </li>
+  {{/each}}
+</ul>
+
+<ul>
+  Page
+  {{#each pages}}
+    <a href="http://localhost:8080/views/products?page={{this}}"><button>{{this}}</button></a>
+  {{/each}}
+</ul>
+
+<a href="http://localhost:8080/views/carts/65453302d7b2e466e8279ad1"><button>Go to cart</button></a>
+<a href="http://localhost:8080/views/logout"><button>Logout</button></a>
+<script src="/js/addButtom.js"></script>
