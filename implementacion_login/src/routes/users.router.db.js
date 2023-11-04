@@ -8,7 +8,7 @@ router.post('/login', async(req,res)=>{
     try{
         const {email, password} = req.body
         if(!email){
-            req.session.errorLogin  = "Ingrese un email valido";
+            req.session.errorLogin  = "Enter a valid email";
             return res.redirect("/views/login");
         }
         const userDb = await usersManager.findByEmail(email)
