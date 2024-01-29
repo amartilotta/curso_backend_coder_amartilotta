@@ -14,7 +14,7 @@ router.post('/login', async(req,res)=>{
         const userDb = await usersManager.findByEmail(email)
         console.log("Usuario: ",userDb);
         if (!userDb){
-            req.session.errorLogin  = "This email is not registered";
+            req.session.errorLogin  = "Unespected error";
             return res.redirect("/views/login");
         }
         if(email === userDb.email && password === userDb.password){
@@ -29,7 +29,7 @@ router.post('/login', async(req,res)=>{
             }
             return res.redirect("/views/products");
         }else{
-            req.session.errorLogin  = "Email and password do not match";
+            req.session.errorLogin  = "Wrong Email or password";
             return res.redirect("/views/login");
         }
 
@@ -42,6 +42,7 @@ router.post('/login', async(req,res)=>{
 
 router.post('/signup', async (req, res) =>{
     try{
+        console.log(req.body);
         const {first_name, last_name, email, password} = req.body
         const requiredFields = ["first_name", "last_name","email", "password"]
         for (const field of requiredFields) {
