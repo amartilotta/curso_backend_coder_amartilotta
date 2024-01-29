@@ -1,0 +1,14 @@
+<h2>LOGIN</h2>
+<form action="/apiDB/users/login" method="POST" class="login-form">
+    Email: <input type="email" name="email" id="email" />
+    Password: <input type="password" name="password" id="password" />
+    <input type="submit" value="LOGIN"/>
+</form>
+
+<a href="/views/signup" class="signup-link">or SIGN UP</a>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+{{#if errorMessage}}
+    <div id="error-message" data-message="{{errorMessage}}"></div>
+{{/if}}
+<script src="/js/toastify-script.js"></script>
