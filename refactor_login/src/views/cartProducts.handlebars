@@ -1,0 +1,16 @@
+<h1>Cart products</h1>
+
+<ul >
+  {{#each products}}
+    <li class="list-cart">
+        <span> <b>{{this._id.title}}</b> </span>
+        - <span> Quantity:{{this.quantity}} </span>
+    </li>
+  {{/each}}
+</ul>
+
+<a href="/views/products" class="back-link">Volver</a>
+
+{{#unless products.length}}
+  <h2>The cart is empty!</h2>
+{{/unless}}
