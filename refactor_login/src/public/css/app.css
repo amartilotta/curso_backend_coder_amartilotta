@@ -158,9 +158,9 @@ h1, h2, h3 {
     transition: background-color 0.3s;
   }
   
-  .button-container button:hover {
+  /* .button-container button:hover {
     background-color: #258cd1;
-  }
+  } */
   button[type="submit"] {
   background-color: #6c757d; /* Fondo gris */
   color: #fff; /* Texto blanco */
