@@ -1,0 +1,16 @@
+{{!-- <form action="/login" method="POST">
+    Name: <input type="text" name="name" id="name" />
+    Email: <input type="text" name="email" id="email" />
+    <input type="submit" value="LOGIN" />
+</form> --}}
+<h1>LOGIN</h1>
+{{!-- <script>
+    // Coloca el código JavaScript aquí
+    alert('¡Hola, mundo!');
+</script> --}}
+<form action="/api/sessions/login" method="POST">
+    email: <input type="text" name="email" id="email" />
+    password: <input type="password" name="password" id="password" />
+    <input type="submit" value="LOGIN" />
+</form>
+<a href="/signup" class="signup-link">or SIGN UP</a>
