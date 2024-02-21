@@ -1,0 +1,28 @@
+<h2>Bienvenido {{first_name}} {{last_name}}</h2>
+<h2>Email: {{email}}</h2>
+<h2>Rol: {{role}}</h2>
+<h3>Products</h3>
+<div  class="div-list-products">
+  <ul data-cart-id={{cartValue}}>
+    {{#each products}}
+        <li class="list-products">
+            <span><b>{{this.name}}</b></span>
+            - <span>Price: ${{this.price}}</span>
+            - <span>Stock: {{this.stock}}</span>
+            - <span>Description: {{this.description}}</span>
+            <button data-product-id={{this._id}} {{#with ../cart as |currentCart|}} data-cart-id={{currentCart}} {{/with}}  onclick="addProductToCarts(this)">Add to cart</button>
+        </li>
+    {{/each}}
+  </ul>
+
+  <ul>
+    Page
+    {{#each pages}}
+      <a href="http://localhost:8080/views/products?page={{this}}"><button>{{this}}</button></a>
+    {{/each}}
+  </ul>
+</div>
+
+<a href="http://localhost:8080/carts/{{cart}}" class="buttom-cart"><button>Go to cart</button></a>
+<a href="http://localhost:8080/logout" class="buttom-logout"><button>Logout</button></a>
+<script src="/js/addButtom.js"></script>

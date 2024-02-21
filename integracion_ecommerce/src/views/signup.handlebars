@@ -1,0 +1,18 @@
+<h1>SING UP</h1>
+<form action="/api/users/signup" method="post" class="signup-form">
+    First Name: <input type="text" name="first_name" id="first_name">
+    Last Name: <input type="text" name="last_name" id="last_name">
+    Email: <input type="email" name="email" id="email">
+    Age: <input type="age" name="age" id="age">
+    Password: <input type="password" name="password" id="password">
+    <input type="submit" value="SING UP">
+    <button onclick="location.href='/api/sessions/auth/google'">GOOGLE</button>
+</form>
+<a href="/login" class="signup-link">or LOGIN</a>
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+{{#if errorMessage}}
+    <div id="error-message" data-message="{{errorMessage}}"></div>
+{{/if}}
+<script src="/js/toastify-script.js"></script>

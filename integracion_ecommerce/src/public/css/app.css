@@ -1,0 +1,144 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+    color: #333;
+  }
+  
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+  
+h1, h2, h3 {
+  color: #333;
+  text-align: center; /* Centra horizontalmente el texto */
+}
+  /* Enlaces */
+  a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  a:hover {
+    color: #258cd1;
+  }
+  /* Estilos para el enlace "SIGN UP" */
+  .signup-link {
+    display: block; /* Convierte el enlace en un bloque para que ocupe todo el ancho */
+    margin-top: 20px; /* Agrega margen superior para separar el enlace del formulario */
+    text-align: center; /* Centra horizontalmente el enlace */
+  }
+
+  .login-form {
+    display: block; /* Convierte el enlace en un bloque para que ocupe todo el ancho */
+    margin-top: 20px; /* Agrega margen superior para separar el enlace del formulario */
+    text-align: center; /* Centra horizontalmente el enlace */
+  }
+  .signup-form {
+    display: block; /* Convierte el enlace en un bloque para que ocupe todo el ancho */
+    margin-top: 20px; /* Agrega margen superior para separar el enlace del formulario */
+    text-align: center; /* Centra horizontalmente el enlace */
+  }
+  .div-list-products {
+    display: block; /* Convierte el enlace en un bloque para que ocupe todo el ancho */
+    margin-top: 20px; /* Agrega margen superior para separar el enlace del formulario */
+    text-align: center; /* Centra horizontalmente el enlace */
+  }
+  .list-products {
+    display: block; /* Convierte el enlace en un bloque para que ocupe todo el ancho */
+    margin-top: 20px; /* Agrega margen superior para separar el enlace del formulario */
+    text-align: center; /* Centra horizontalmente el enlace */
+  }
+  .buttom-cart {
+    display: block; /* Convierte el enlace en un bloque para que ocupe todo el ancho */
+    margin-top: 20px; /* Agrega margen superior para separar el enlace del formulario */
+    text-align: center; /* Centra horizontalmente el enlace */
+  }
+  .buttom-logout {
+    display: block; /* Convierte el enlace en un bloque para que ocupe todo el ancho */
+    margin-top: 20px; /* Agrega margen superior para separar el enlace del formulario */
+    text-align: center; /* Centra horizontalmente el enlace */
+  }
+  .list-cart {
+    display: block; /* Convierte el enlace en un bloque para que ocupe todo el ancho */
+    margin-top: 20px; /* Agrega margen superior para separar el enlace del formulario */
+    text-align: center; /* Centra horizontalmente el enlace */
+  }
+  .back-link {
+    display: block; /* Convierte el enlace en un bloque para que ocupe todo el ancho */
+    margin-top: 20px; /* Agrega margen superior para separar el enlace del formulario */
+    text-align: center; /* Centra horizontalmente el enlace */
+  }
+
+.form-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 50%; /* Ajusta el ancho del formulario al 50% del contenedor */
+    text-align: center;
+    margin: 0 auto; /* Centra horizontalmente el formulario */
+  }
+
+  /* Estilos para el botón de Signup */
+  input[type="submit"] {
+    width: 10%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px; /* Añade margen a la derecha del botón */
+    margin-left: 30px;
+  }
+  
+  
+  /* Estilos para campos de entrada de texto */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  button {
+    width: 10%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 20px;
+  }
+  
+  input[type="submit"],
+  button {
+    background-color: #3498db;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  input[type="submit"]:hover,
+  button:hover {
+    background-color: #258cd1;
+  }
+  
+  /* Mensajes de error y éxito */
+  .error-message {
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .success-message {
+    color: #007000;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+
+  

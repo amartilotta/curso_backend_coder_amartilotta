@@ -5,7 +5,7 @@ export default class BasicManager{
     }
     
     async createOne(obj){
-        return this.model.createOne(obj);
+        return this.model.create(obj);
     }
     async findAll(){
         return this.model.find().populate(this.populateOption);
