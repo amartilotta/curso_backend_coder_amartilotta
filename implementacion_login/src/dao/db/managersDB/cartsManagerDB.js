@@ -97,7 +97,7 @@ class CartsManager {
 
     async deleteAllProductsFromCartById(cartId){
         try {
-            const success = await await cartsModel.updateOne({ _id: cartId}, {products:[]})
+            const success = await cartsModel.updateOne({ _id: cartId}, {products:[]})
             return success
         } catch (error) {
             console.error(error)
