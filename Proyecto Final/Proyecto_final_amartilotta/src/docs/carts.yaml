@@ -1,0 +1,181 @@
+paths:
+  /api/carts/{cid}:
+    get:
+      summary: Get cart by id
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          description: Cart identifier
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: Cart found
+          content:
+            application/json:
+              schemas:
+                $ref: "#components/schemas/Cart"
+              example:
+                title: "cart 1"
+                description: "cart 1"
+                code: "1"
+                price: 20
+                status: true
+                stock: 7
+                category: "category 1"
+                thumbnails: []
+                owner: "admin"
+        "500":
+          description: Server error
+        "400":
+          description: Some data is missing
+    put:
+      summary: Update cart by id
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Cart identifier
+      responses:
+        "200":
+          description: Cart updated
+          content:
+            application/json:
+              schemas:
+                $ref: "#components/schemas/Cart"
+              example: []
+        "500":
+          description: Server error
+        "400":
+          description: Some data is missing
+    delete:
+      summary: Empty cart products
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Cart identifier
+      responses:
+        "200":
+          description: Cart emptied
+        "500":
+          description: Server error
+        "400":
+          description: Some data is missing
+  /api/carts/{cid}/product/{pid}:
+    post:
+      summary: Add product to cart by id
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Cart identifier
+        - name: pid
+          in: path
+          required: true
+          description: Product identifier
+      responses:
+        "200":
+          description: Product added to cart
+        "500":
+          description: Server error
+        "400":
+          description: Some data is missing
+    delete:
+      summary: Delete product from cart by id
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Cart identifier
+        - name: pid
+          in: path
+          required: true
+          description: Product identifier
+      responses:
+        "200":
+          description: Product removed from cart
+        "500":
+          description: Server error
+        "400":
+          description: Some data is missing
+    put:
+      summary: Update product quantity from cart by id
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Cart identifier
+        - name: pid
+          in: path
+          required: true
+          description: Product identifier
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/updateProductQuantityInCartById"
+      responses:
+        "200":
+          description: Product removed from cart
+        "500":
+          description: Server error
+        "400":
+          description: Some data is missing
+  /api/carts/{cid}/purchase:
+    post:
+      summary: Purchase cart products
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Cart identifier
+      responses:
+        "200":
+          description: Products purchased
+        "500":
+          description: Server error
+        "400":
+          description: Some data is missing
+
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        id:
+          type: string
+        products:
+          type: array
+          items:
+            properties:
+              product:
+                type: string
+              quantity:
+                type: number
+
+      example:
+        products: [{"product": "655bf9dccf7cb75b3f3b5706", "quantity": 2}, {"product": "655bf9dccf7cb75b3f3b5705", "quantity": 10}]
+
+  requestBodies:
+    updateProductQuantityInCartById:
+      type: object
+      properties:
+        quantity:
+            type: number
+      example:
+        quantity: 5

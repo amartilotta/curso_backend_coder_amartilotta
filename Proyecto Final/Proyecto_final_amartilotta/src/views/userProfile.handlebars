@@ -1,0 +1,64 @@
+<h3>Data</h3>
+<span> <b>Id: </b> {{user._id}}</span><br>
+<span> <b>First Name: </b> {{user.first_name}}</span><br>
+{{#if user.last_name }}<span> <b>Last Name: </b> {{user.last_name}}</span><br>{{/if}}
+<span> <b>Email: </b> {{user.email}}</span><br>
+{{#if user.age }}<span> <b>Age: </b> {{user.age}}</span><br>{{/if}}
+<span> <b>Role: </b> {{user.role}}</span>
+
+<hr>
+
+<h3>Upload images</h3>
+<form action="/api/users/{{user._id}}/documents" method="post" enctype="multipart/form-data">
+    <label for="file_type">File type</label>
+    <select name="file_type" id="file_type" onclick="setDocumentTypeSelectVisibility()">
+        <option value="profile">Profile</option>
+        <option value="product">Product</option>
+        <option value="document">Document</option>
+    </select>
+    <select name="document_type" id="document_type" hidden>
+        <option value="identification">Identification</option>
+        <option value="proof_adress">Proof of adress</option>
+        <option value="proof_account">Proof of account status</option>
+    </select>
+    <input type="file" name="document" accept="image/*" required/>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
+<hr>
+
+<h3>Restore password</h3>
+<button onclick="sendRestorePasswordEmail('{{user._id}}')">Restore password</button>
+
+
+<script>
+  function setDocumentTypeSelectVisibility(){
+    const fileTypeSelect = document.getElementById("file_type")
+    const documentTypeSelect = document.getElementById("document_type")
+    
+    if (fileTypeSelect.value === "document") {
+        documentTypeSelect.removeAttribute("hidden")
+    } else {
+        documentTypeSelect.setAttribute("hidden", true)
+    }
+
+  }
+
+  async function sendRestorePasswordEmail(userId){
+    try{
+      const response = await fetch(`/api/users/password/restore/mail/${userId}`)
+      
+      if(response.ok){
+        alert("password reset email sent")
+      }
+      else{
+        alert("error sending restoration email")
+      }
+      const data = await response.json()
+    }
+    catch (error){
+      console.log(error)
+    }
+  }
+</script>

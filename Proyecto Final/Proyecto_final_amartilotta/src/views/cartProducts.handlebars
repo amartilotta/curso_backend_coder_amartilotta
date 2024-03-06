@@ -1,0 +1,43 @@
+<h1>Cart products</h1>
+
+{{#if products }}
+  <ul>
+    {{#each products}}
+      <li>
+          <span> <b>{{this.product.title}}</b> </span>
+          - <span> Quantity:{{this.quantity}} </span>
+      </li>
+    {{/each}}
+  </ul>
+
+  <button data-cart-id="{{cartId}}" onclick="purchaseProducts(this)">Purchase</button>
+
+{{else}}
+  <p>The cart is empty</p>
+{{/if}}
+
+
+
+<script>
+  async function purchaseProducts(element){
+    try{
+      const cartId = element.getAttribute("data-cart-id")
+      const response = await fetch(`/api/carts/${cartId}/purchase`, {
+        method: "post"
+      })
+      
+      if(response.ok){
+        alert("purchase made successfully, an email will be sent with the purchase details")
+        window.location.reload()
+      }
+      else{
+        alert("error when making purchase")
+      }
+      const data = await response.json()
+    }
+    catch (error){
+      console.log(error)
+    }
+  }
+
+</script>

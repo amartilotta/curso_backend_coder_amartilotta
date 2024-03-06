@@ -1,0 +1,70 @@
+<h2>Welcome, {{userData.first_name}}</h2>
+
+<h1>Products</h1>
+<ul>
+  {{#each products}}
+  {{userData.first_name}}
+    <li>
+        <span> <b>{{this.title}}</b> </span>
+        - <span> Price: ${{this.price}} </span>
+        - <span> Stock: {{this.stock}} </span>
+        - <span> Category: {{this.category}} </span>
+        <button data-product-id="{{this._id}}" data-cart-id="{{../userData.cart}}" onclick="addProductToCart(this)">Add to cart</button>
+        <button data-product-id="{{this._id}}" data-cart-id="{{../userData.cart}}" onclick="removeProductFromCart(this)">Remove from cart</button>
+    </li>
+  {{/each}}
+</ul>
+
+<ul>
+  Page
+  {{#each pages}}
+    <a href="http://localhost:8080/products?page={{this}}"><button>{{this}}</button></a>
+  {{/each}}
+</ul>
+
+<a href="http://localhost:8080/carts/{{userData.cart}}"><button>Go to cart</button></a>
+<a href="http://localhost:8080/profile"><button>Go to profile</button></a>
+
+<script>
+  async function addProductToCart(element){
+    try{
+      const productId = element.getAttribute("data-product-id")
+      const cartId = element.getAttribute("data-cart-id")
+      const response = await fetch(`/api/carts/${cartId}/product/${productId}`, {
+        method: "post"
+      })
+      
+      if(response.ok){
+        alert("product added to cart")
+      }
+      else{
+        alert("error adding product")
+      }
+      const data = await response.json()
+    }
+    catch (error){
+      console.log(error)
+    }
+  }
+
+  async function removeProductFromCart(element){
+     try{
+      const productId = element.getAttribute("data-product-id")
+      const cartId = element.getAttribute("data-cart-id")
+      const response = await fetch(`/api/carts/${cartId}/product/${productId}`, {
+        method: "delete"
+      })
+      
+      if(response.ok){
+        alert("product removed")
+      }
+      else{
+        alert("error removing product")
+      }
+      const data = await response.json()
+    }
+    catch (error){
+      console.log(error)
+    }
+  }
+</script>
